@@ -75,3 +75,4 @@
 - Specialist agents were not used for M0; the work was small enough for the lead to do and verify directly.
 
 **Next:** M1 identity and tenancy (Better Auth, organizations, roles, policy module, audit events, cross-organization denial tests).
+- Fresh-clone check: cloned the commit to an empty directory, `pnpm install --frozen-lockfile`, `pnpm check`, `pnpm db:migrate` and `pnpm e2e` all passed (52 unit, 34 browser tests).
