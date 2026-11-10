@@ -1,0 +1,278 @@
+@import "tailwindcss";
+@import "@fontsource-variable/instrument-sans/wdth.css";
+@import "@fontsource-variable/geist-mono/wght.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens. See docs/LIQUID_GLASS_DESIGN.md.
+   Solid colour pairs are contrast-tested in src/lib/tokens.test.ts.
+   --------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Content plane: opaque */
+  --canvas: #f4f6f8;
+  --surface: #ffffff;
+  --surface-raised: #ffffff;
+  --sunken: #eaeef2;
+  --ink: #17212b;
+  --ink-2: #4d5a68;
+  --ink-3: #647180;
+  --stroke: #dde2e8;
+  --stroke-strong: #c3cbd4;
+
+  /* One action colour */
+  --accent: #0e6b75;
+  --accent-hover: #0a565e;
+  --accent-ink: #ffffff;
+  --accent-text: #0b5d66;
+  --accent-soft: #e2f0f1;
+
+  /* Status: always paired with an icon and a word */
+  --ok: #17663f;
+  --ok-soft: #e3f2ea;
+  --warn: #85500a;
+  --warn-soft: #fbefd9;
+  --danger: #a3261f;
+  --danger-soft: #fbe6e4;
+  --neutral: #4d5a68;
+  --neutral-soft: #e8ecf0;
+
+  /* Interaction plane: glass */
+  --glass-tint: rgb(255 255 255 / 0.66);
+  --glass-tint-strong: rgb(255 255 255 / 0.88);
+  --glass-solid: #fbfcfd;
+  --glass-stroke: rgb(23 33 43 / 0.09);
+  --glass-edge: inset 0 1px 0 rgb(255 255 255 / 0.85), inset 0 0 0 1px rgb(255 255 255 / 0.35);
+  --glass-shadow: 0 1px 2px rgb(23 33 43 / 0.05), 0 10px 28px -14px rgb(23 33 43 / 0.28);
+  --glass-blur: 18px;
+
+  /* Focus plane */
+  --overlay: rgb(16 21 27 / 0.38);
+  --shadow-pop: 0 2px 6px rgb(23 33 43 / 0.08), 0 24px 56px -20px rgb(23 33 43 / 0.38);
+  --focus: #0e6b75;
+
+  --radius-control: 8px;
+  --radius-card: 12px;
+  --radius-float: 18px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 140ms;
+  --dur-pop: 220ms;
+
+  --row-h: 44px;
+  --cell-py: 10px;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #10151b;
+  --surface: #171e26;
+  --surface-raised: #1c242d;
+  --sunken: #0c1116;
+  --ink: #eff3f7;
+  --ink-2: #aab5c0;
+  --ink-3: #8a97a5;
+  --stroke: #27313c;
+  --stroke-strong: #394552;
+
+  --accent: #56c2cc;
+  --accent-hover: #74d0d8;
+  --accent-ink: #06272b;
+  --accent-text: #6bcbd4;
+  --accent-soft: #12333a;
+
+  --ok: #6fcf9a;
+  --ok-soft: #14301f;
+  --warn: #e7b765;
+  --warn-soft: #352814;
+  --danger: #f1958e;
+  --danger-soft: #3a1c1a;
+  --neutral: #aab5c0;
+  --neutral-soft: #222b35;
+
+  --glass-tint: rgb(28 36 45 / 0.62);
+  --glass-tint-strong: rgb(28 36 45 / 0.86);
+  --glass-solid: #1a222b;
+  --glass-stroke: rgb(255 255 255 / 0.08);
+  --glass-edge: inset 0 1px 0 rgb(255 255 255 / 0.09), inset 0 0 0 1px rgb(255 255 255 / 0.03);
+  --glass-shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 14px 32px -14px rgb(0 0 0 / 0.7);
+
+  --overlay: rgb(4 7 10 / 0.6);
+  --shadow-pop: 0 2px 6px rgb(0 0 0 / 0.35), 0 24px 56px -20px rgb(0 0 0 / 0.8);
+  --focus: #56c2cc;
+}
+
+[data-density="compact"] {
+  --row-h: 34px;
+  --cell-py: 6px;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-stroke: var(--stroke);
+  --color-stroke-strong: var(--stroke-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
+
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+  --radius-float: var(--radius-float);
+
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out: var(--ease-out);
+}
+
+@layer base {
+  html {
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    min-height: 100dvh;
+    background: var(--canvas);
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  /* Glass belongs to floating navigation and overlays only, never to data. */
+  .glass {
+    background: var(--glass-tint);
+    border: 1px solid var(--glass-stroke);
+    box-shadow: var(--glass-edge), var(--glass-shadow);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.5);
+    backdrop-filter: blur(var(--glass-blur)) saturate(1.5);
+  }
+
+  /* Overlays that hold text to read (command palette): more tint, same material. */
+  .glass-strong {
+    background: var(--glass-tint-strong);
+  }
+
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass,
+    .glass-strong {
+      background: var(--glass-solid);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+    .glass,
+    .glass-strong {
+      background: var(--glass-solid);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-color: var(--stroke-strong);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .glass,
+    .glass-strong {
+      background: Canvas;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-color: CanvasText;
+      box-shadow: none;
+    }
+  }
+
+  /* Page titles: the same family, drawn narrower, like the heading of a printed form. */
+  .title {
+    font-stretch: 84%;
+    font-weight: 600;
+    letter-spacing: -0.012em;
+    line-height: 1.12;
+  }
+
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ident {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+    letter-spacing: -0.01em;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

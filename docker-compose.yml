@@ -1,0 +1,15 @@
+# Local development database for machines with Docker.
+# Without Docker, use `pnpm db:start` (needs PostgreSQL 16 binaries installed).
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: propertypilot
+      POSTGRES_PASSWORD: propertypilot
+      POSTGRES_DB: propertypilot
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

@@ -1,0 +1,20 @@
+{
+  "name": "propertypilot",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "dev": "pnpm --filter @propertypilot/web dev",
+    "build": "pnpm --filter @propertypilot/web build",
+    "start": "pnpm --filter @propertypilot/web start",
+    "lint": "pnpm --filter @propertypilot/web lint",
+    "typecheck": "pnpm --filter @propertypilot/web typecheck",
+    "test": "pnpm --filter @propertypilot/web test",
+    "e2e": "pnpm --filter @propertypilot/web e2e",
+    "db:start": "bash scripts/dev-db.sh start",
+    "db:stop": "bash scripts/dev-db.sh stop",
+    "db:status": "bash scripts/dev-db.sh status",
+    "db:migrate": "pnpm --filter @propertypilot/web db:migrate",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
+  }
+}

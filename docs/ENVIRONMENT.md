@@ -17,11 +17,12 @@ Everything below was actually run in the Claude Code cloud container unless mark
 | Capability | Status |
 | --- | --- |
 | Docker daemon | CLI only; compose files cannot be run here. CI and local machines can. |
+| TypeScript 7 with the linter | typescript-eslint rejects TS 7.0; the project pins TS 6.x |
 | Lighthouse, gitleaks, tesseract, qpdf | not installed. Lighthouse can be added as a dev dependency driving the pre-installed Chromium (needs approval). |
 | PyTorch / docTR | not installed; OCR of scanned PDFs cannot run here yet |
 | GitHub MCP server | failed to connect; `git` and `gh` are used instead |
 | Playwright MCP / Chrome DevTools MCP | not configured; plain Playwright covers the need |
-| Live agent discovery | not provable mid-session: project agents load when a session starts. Confirm in the next session that the 12 agents appear. |
+| Live agent discovery | The project skills appeared in the session's skill list after they were committed. The 12 project agents did not appear in the agent list mid-session; confirm at the start of the next session. |
 
 Postgres must not run as root: use a non-root OS user and a data directory that user owns.
 

@@ -1,6 +1,6 @@
 # Architecture
 
-Modular monolith in a pnpm monorepo, TypeScript throughout.
+Modular monolith in a pnpm workspace, TypeScript throughout. `apps/web` holds the UI (`src/app`, `src/components`) and server modules (`src/server`); `services/extractor` is a separate Python service.
 
 | Concern | Choice | Reason |
 | --- | --- | --- |
@@ -22,3 +22,11 @@ Modular monolith in a pnpm monorepo, TypeScript throughout.
 Domain model follows `docs/CONCEPTS_FROM_OPERATIONS_EXPERIENCE.md`. Future modules (SiteOps, ServiceOps, LeaseIQ) get schema namespaces and route groups only when approved.
 
 **Cost target:** about $0-25/month early on (small app host, free-tier Postgres, object storage free tier). No service is connected yet.
+
+## What exists after M0
+- `src/server/env.ts`: environment schema, parsed at server start by `src/instrumentation.ts`. A database URL is required in production.
+- `src/server/db`: postgres.js pool, Drizzle client, migration runner, migrations in `apps/web/drizzle`. The schema file is empty until M1.
+- `src/server/health.ts` and `GET /api/health`: live database check; returns 503 when the database is not connected.
+- `src/app/(app)`: the signed-in shell route group. Sign-in pages and vendor upload pages will live in sibling groups with their own layouts.
+- `src/app/globals.css`: design tokens for light and dark, glass material with fallbacks for unsupported browsers, reduced transparency, increased contrast and forced colours.
+- Baseline response headers (`nosniff`, frame denial, referrer policy, permissions policy). A Content-Security-Policy is not set yet.
