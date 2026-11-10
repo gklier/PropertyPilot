@@ -1,6 +1,6 @@
 # PropertyPilot — Claude Code project rules
 
-- This is an independent, commercial SaaS built from generic domain principles. Never access or transplant code, screenshots, documents, data, assets, configuration, URLs, or branding from prior employer/internal repos. All seed data must be fictitious.
+- This is an independent, commercial SaaS. All seed data, documents and people must be fictitious. Never bring in data, real documents, screenshots, branding, URLs or configuration from any prior project. Code reuse from the owner's earlier personal project is allowed only where the owner has authorized it and it is recorded in `docs/DECISIONS.md` (currently: `services/extractor`, see its `PROVENANCE.md`). Do not name prior projects or employers in code, commits or docs.
 - Read `PROPERTY_PILOT_FABLE_MASTER.md` at project kickoff; read only needed supporting docs during normal tasks.
 - Product sequence: **CertWatch working vertical slice -> polish/security -> SiteOps -> future modules**. No feature sprawl.
 - Visual target: tasteful Apple-inspired web Liquid Glass for navigation and controls, precision enterprise content, dark/light themes, actual usability. Read `docs/LIQUID_GLASS_DESIGN.md` before visual work.
